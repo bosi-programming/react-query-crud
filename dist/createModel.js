@@ -44,13 +44,13 @@ function createModel(keys, axiosService) {
             const response = await axiosService.get(`/${keys.basicUrl}/crudList`, {
                 params: Object.assign(Object.assign({}, params), { _id: ids.join(',') }),
             });
-            return response.data.response;
+            return response.data;
         },
         fetchMany: async (args) => {
             const response = await axiosService.get(`/${keys.basicUrl}${(0, lodash_1.get)(args, 'postFix', '')}`, {
                 params: (0, lodash_1.omit)(args, 'postFix'),
             });
-            return response.data.response;
+            return response.data;
         },
         create: async (args) => {
             const { config } = args;

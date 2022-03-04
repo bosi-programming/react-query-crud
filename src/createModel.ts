@@ -31,9 +31,7 @@ export function createModel<ModelType>(
   return {
     keys,
 
-    customFetch: async <CustomType>(
-      args: CustomFetch,
-    ): Promise<CustomType> => {
+    customFetch: async <CustomType>(args: CustomFetch): Promise<CustomType> => {
       const { customUrl, ...params } = args;
       const response = await axiosService.get(`/${customUrl}`, {
         params,
@@ -64,7 +62,9 @@ export function createModel<ModelType>(
       return response.data;
     },
 
-    fetchByIds: async (args: ParamsWithIds): Promise<ModelType[]> => {
+    fetchByIds: async (
+      args: ParamsWithIds,
+    ): Promise<{ page: number; size: number; response: ModelType[] }> => {
       const { ids, ...params } = args;
       const response = await axiosService.get<{
         page: number;
@@ -73,10 +73,12 @@ export function createModel<ModelType>(
       }>(`/${keys.basicUrl}/crudList`, {
         params: { ...params, _id: ids.join(',') },
       });
-      return response.data.response;
+      return response.data;
     },
 
-    fetchMany: async (args: BasicParams): Promise<ModelType[]> => {
+    fetchMany: async (
+      args: BasicParams,
+    ): Promise<{ page: number; size: number; response: ModelType[] }> => {
       const response = await axiosService.get<{
         page: number;
         size: number;
@@ -84,7 +86,7 @@ export function createModel<ModelType>(
       }>(`/${keys.basicUrl}${get(args, 'postFix', '')}`, {
         params: omit(args, 'postFix'),
       });
-      return response.data.response;
+      return response.data;
     },
 
     create: async (args: BasicParams): Promise<ModelType> => {

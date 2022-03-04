@@ -14,8 +14,40 @@ export declare const createCrud: <ModelType>(entityName: string, axiosService: A
         }];
     };
     fetchById: (params: ParamsWithId, options?: QueryObserverOptions<ModelType, unknown, ModelType, ModelType, import("react-query").QueryKey>) => import("react-query").UseQueryResult<ModelType, Error>;
-    fetchByIds: (params: ParamsWithIds, options?: QueryObserverOptions<ModelType[], unknown, ModelType[], ModelType[], import("react-query").QueryKey>) => import("react-query").UseQueryResult<ModelType[], Error>;
-    fetchMany: (params?: BasicParams, options?: QueryObserverOptions<ModelType[], unknown, ModelType[], ModelType[], import("react-query").QueryKey>) => import("react-query").UseQueryResult<ModelType[], Error>;
+    fetchByIds: (params: ParamsWithIds, options?: QueryObserverOptions<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, unknown, {
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, {
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, import("react-query").QueryKey>) => import("react-query").UseQueryResult<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, Error>;
+    fetchMany: (params?: BasicParams, options?: QueryObserverOptions<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, unknown, {
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, {
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, import("react-query").QueryKey>) => import("react-query").UseQueryResult<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }, Error>;
     customFetch: <CustomType>(params: CustomFetch, options?: QueryObserverOptions<CustomType, unknown, CustomType, CustomType, import("react-query").QueryKey>) => import("react-query").UseQueryResult<CustomType, Error>;
     create: (options: UseMutationOptions<ModelType, unknown, AxiosRequestConfig<any>, unknown>) => import("react-query").UseMutationResult<ModelType, Error, object, unknown>;
     edit: (options: UseMutationOptions<ModelType, unknown, AxiosRequestConfig<any>, unknown>) => import("react-query").UseMutationResult<ModelType, Error, object, unknown>;

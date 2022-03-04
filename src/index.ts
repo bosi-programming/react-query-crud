@@ -6,7 +6,6 @@ import {
   ParamsWithId,
   ParamsWithIds,
   BasicParams,
-  CustomRequest,
   CustomFetch,
 } from './createModel';
 import { createQuery, createMutation } from './createReactQueryHooks';
@@ -44,9 +43,13 @@ export const createCrud = <ModelType>(
       ),
     fetchByIds: (
       params: ParamsWithIds,
-      options?: QueryObserverOptions<ModelType[]>,
+      options?: QueryObserverOptions<{
+        page: number;
+        size: number;
+        response: ModelType[];
+      }>,
     ) =>
-      createQuery<ModelType[]>(
+      createQuery<{ page: number; size: number; response: ModelType[] }>(
         model.keys.byIds(params),
         model.fetchByIds,
         params,
@@ -54,9 +57,13 @@ export const createCrud = <ModelType>(
       ),
     fetchMany: (
       params?: BasicParams,
-      options?: QueryObserverOptions<ModelType[]>,
+      options?: QueryObserverOptions<{
+        page: number;
+        size: number;
+        response: ModelType[];
+      }>,
     ) =>
-      createQuery<ModelType[]>(
+      createQuery<{ page: number; size: number; response: ModelType[] }>(
         model.keys.many(params),
         model.fetchMany,
         params,

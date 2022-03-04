@@ -32,8 +32,16 @@ export declare function createModel<ModelType>(keys: ReturnType<typeof createKey
     customFetch: <CustomType>(args: CustomFetch) => Promise<CustomType>;
     customRequest: <CustomType_1>(args: CustomRequest) => Promise<CustomType_1>;
     fetchById: (args: ParamsWithId) => Promise<ModelType>;
-    fetchByIds: (args: ParamsWithIds) => Promise<ModelType[]>;
-    fetchMany: (args: BasicParams) => Promise<ModelType[]>;
+    fetchByIds: (args: ParamsWithIds) => Promise<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }>;
+    fetchMany: (args: BasicParams) => Promise<{
+        page: number;
+        size: number;
+        response: ModelType[];
+    }>;
     create: (args: BasicParams) => Promise<ModelType>;
     edit: (args: BasicParams) => Promise<ModelType>;
     delete: (args: BasicParams) => Promise<ModelType>;
